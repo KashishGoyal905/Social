@@ -1,4 +1,6 @@
 const express = require('express');
+// requiring cookie parser  {for reading and writin into cookies}
+const cookieParser = require('cookie-parser')
 const app = express();
 const port = 8000;
 const expressLayouts = require('express-ejs-layouts');
@@ -11,6 +13,8 @@ app.use(expressLayouts);
 app.set('layout extractStyles', true);
 app.set('layout extractScripts', true);
 
+// using cookie parser 
+app.use(cookieParser());
 app.use(express.urlencoded());
 
 // set up the view engine
