@@ -18,31 +18,32 @@ module.exports.signUp = function (req, res) {
 }
 
 module.exports.create = function (req, res) {
-    User.create({
-        name: req.body.name,
-        email: req.body.email,
-        password: req.body.password
-    }, function (err, newUser) {
+    // checking if password and confirm pass are same
+    if (req.body.password != req.body.confirm_password) {
+        return res.redirect('back');
+    }
+    // finding if already exist via email
+    User.findOne({ email: req.body.email }, function (err, user) {
         if (err) {
-            console.log("error in creating a New User", err);
+            console.log("error in finding user in signinng up");
             return;
         }
-        console.log('********', newUser);
-        return res.redirect('back');
+        // if not found creating
+        if (!user) {
+            User.create(req.body, function (err, user) {
+                if (err) {7
+                    console.log("error in creating a user");
+                    return;
+                }
+                return res.redirect('/users//sign-In');
+            })
+        } else {
+            return res.redirect('back');` `
+        }
     })
+
 }
 
 module.exports.createSession = function (req, res) {
-    User.create({
-        name: req.body.name,
-        email: req.body.email,
-        password: req.body.password
-    }, function (err, newUser) {
-        if (err) {
-            console.log("error in creating a New User", err);
-            return;
-        }
-        console.log('********', newUser);
-        return res.redirect('back');
-    })
+
 }
