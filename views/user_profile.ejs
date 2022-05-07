@@ -13,8 +13,13 @@
     <h1>
         Codeial / Profile Page
     </h1>
-    <p>Email:<%= user_list.email %> </p>
-    <p>Name:<%= user_list.name %> </p>
+    <p>Email:<%= user_list.email %>
+    </p>
+    <p>Name:<%= user_list.name %>
+    </p>
+    <form action="/users/sign-Out" method="post">
+        <button type="submit">Sign Out</button>
+    </form>
 
 </body>
 
