@@ -1,0 +1,34 @@
+#header {
+    background-color: rgb(34, 126, 238);
+    padding-top: 15px;
+    color: white;
+    font-weight: bold;
+    font-size: 25px;
+    height: 45px;
+    width: 80%;
+    position: relative;
+    padding-left: 6px;
+}
+
+;
+
+.auth {
+    // position: absolute;
+    background-color: rgb(34, 126, 238);
+    display: flex;
+    justify-content: flex-start;
+}
+
+.list {
+    display: flex;
+    padding-top: 3px;
+    padding-right: 20px;
+    list-style-type: none;
+}
+
+.content {
+    color: white;
+    font-size: 15px;
+    padding-right: 35px;
+    text-decoration: none;
+}
