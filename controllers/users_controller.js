@@ -57,7 +57,6 @@ module.exports.create = function (req, res) {
             // create user
             User.create(req.body, function (err, user) {
                 if (err) {
-                    7
                     console.log("error in creating a user");
                     return;
                 }
