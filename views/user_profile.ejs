@@ -10,18 +10,23 @@
 </head>
 
 <body>
-    <h1>
-        Codeial / Profile Page
-    </h1>
-    <p>
-        <%=user.name%>
-    </p>
-    <p>
-        <%=user.email%>
-    </p>
-    <form action="/users/sign-0ut" method="post">
-        <button type="submit">Sign Out</button>
-    </form>
+    <div class="container">
+        <h1>
+            <%=user.name%> Profile
+        </h1>
+        <p>
+            <b>Name :</b>
+            <%=user.name%>
+        </p>
+        <p>
+            <b>Email :</b>
+            <%=user.email%>
+        </p>
+        <form action="/users/sign-out" method="get" id="button">
+            <button type="submit">Sign Out</button>
+        </form>
+    </div>
+
 
 </body>
 
