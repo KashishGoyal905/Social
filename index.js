@@ -1,5 +1,5 @@
 const express = require('express');
-// requiring cookie parser  {for reading and writin into cookies}
+// requiring cookie parser  {for reading and writin into cookies}  // not required in passport
 const cookieParser = require('cookie-parser')
 const app = express();
 const port = 8000;
@@ -9,6 +9,8 @@ const db = require('./config/mongoose');
 const session = require('express-session');
 const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
+// 
+// to store cookies in db
 const MongoStore = require('connect-mongo');
 
 app.use(express.static('./assets'));
@@ -28,7 +30,7 @@ app.set('views', './views');
 
 
 
-// creating encryption thing for id that pass to cookie using express session
+// creating encryption thing for id that pass to cookie using express session(which encrypt the cookie)
 // mongostore is used to store cookie in db 
 app.use(session({
     name: 'codeial',
@@ -39,7 +41,10 @@ app.use(session({
         maxAge: (1000 * 60 * 100)
     },
     store: MongoStore.create({
-        mongoUrl: 'mongodb://localhost/codeial_development'
+        mongoUrl: 'mongodb://localhost/codeial_development',
+        autoRemove: 'disabled'
+    }, function (err) {
+        console.log(err || 'connect mongo error');
     })
 }));
 

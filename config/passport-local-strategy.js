@@ -6,7 +6,9 @@ const LocalStrategy = require('passport-local').Strategy;
 const User = require('../models/user');
 
 // authenticate using passport
+// using local strategy of passport
 passport.use(new LocalStrategy({
+    // telling our username to find by 
     usernameField: 'email'
 },
     function (email, password, done) {
@@ -43,8 +45,10 @@ passport.deserializeUser(function (id, done) {
 
 })
 
+// profile page
 passport.checkAuthentication = function (req, res, next) {
     if (req.isAuthenticated()) {
+        // to controllers part,means to 3rd argument of routes
         return next();
     }
     return res.redirect('/users/sign-in');
