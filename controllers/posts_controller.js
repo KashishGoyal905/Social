@@ -10,7 +10,7 @@ module.exports.create = function (req, res) {
             console.log('error in creating a post', err);
             return;
         }
-        return res.render('home', { title: 'home', post_list: post });
+        return res.redirect('back');
     }
     )
 };
