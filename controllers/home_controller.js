@@ -18,14 +18,22 @@ module.exports.home = function (req, res) {
     // })
 
     // populate the user of each of posts
-    Post.find({}).populate('user').exec(function (err, posts) {
-        if (err) {
-            console.log(err, "error in finding posts");
-        }
-        return res.render('home', {
-            title: "Home",
-            posts: posts
-        });
-    })
+    Post.find({})
+        .populate('user')
+        .populate({
+            path: 'comments',
+            populate: {
+                path: 'user'
+            }
+        })
+        .exec(function (err, posts) {
+            if (err) {
+                console.log(err, "error in finding posts");
+            }
+            return res.render('home', {
+                title: "Home",
+                posts: posts
+            });
+        })
 }
 
