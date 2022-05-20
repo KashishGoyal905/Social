@@ -16,7 +16,25 @@ module.exports.profile = function (req, res) {
     //     console.log('1')
     //     return res.redirect('/users/sign-In');
     // }
-    return res.render('user_profile', { title: 'home' });
+    User.findById(req.params.id, function (err, user) {
+        return res.render('user_profile', {
+            title: 'home',
+            profile_user: user
+        });
+    })
+}
+
+module.exports.update = function (req, res) {
+    console.log("updating");
+    if (req.user.id == req.params.id) {
+        User.findByIdAndUpdate(req.params.id, req.body, function (err, user) {
+            return res.redirect('back');
+        });
+    } else {
+        return res.status(401).send('Unauthorized');
+    }
+    console.log("updated");
+
 }
 
 // sign form page
