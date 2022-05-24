@@ -15,7 +15,6 @@ module.exports.create = async (req, res) => {
     }
 };
 
-
 module.exports.destroy = async (req, res) => {
     try {
         const delPost = await Post.findById(req.params.id);
