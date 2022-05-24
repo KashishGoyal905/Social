@@ -1,0 +1,16 @@
+.footer {
+  background-color: rgba(40, 38, 38, 0.274);
+  height: 5%;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 20px; }
+
+.foot {
+  display: flex;
+  justify-content: space-around; }
+
+.content2 {
+  font-size: 20px;
+  color: black;
+  padding-right: 15px;
+  text-decoration: none; }
