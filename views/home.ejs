@@ -50,34 +50,36 @@
                                 <div class="post-comment-list">
                                     <ul id="post-comments-<%= post._id %>">
 
-                                        <p>
-                                            <% for(let comment of post.comments){ %>
-                                                <%=console.log(comment._id)%>
-                                                    <% if((locals.user) && (locals.user.id==comment.user.id)){ %>
-                                                        <small>
-                                                            <a href="/comments/destroy/<%=comment._id %>">X</a>
-                                                        </small>
-                                                        <% } %>
-                                                            <%=comment.content%> --
-                                                                <small>
-                                                                    <%=comment.user.name%>
-                                                                </small>
-                                        </p>
-                                        <% } %>
-                                    </ul>
-                                </div>
-            </p>
-            <section id="user-freinds">
-                <h4>Freinds</h4>
-                <% for(u of all_users){ %>
-                    <p>
-                        <a href="/users/profile/<%= u.id %>">
-                            <%=u.name %>
-                        </a>
-                    </p>
-                    <% } %>
-            </section>
-            <% } %>
+                                            <p>
+                                                <% for(let comment of post.comments){ %>
+                                                    <%=console.log(comment._id)%>
+                                                        <% if((locals.user) && (locals.user.id==comment.user.id)){ %>
+                                                            <small>
+                                                                <a href="/comments/destroy/<%=comment._id %>">X</a>
+                                                            </small>
+                                                            <% } %>
+                                                                <%=comment.content%> --
+                                                                    <small>
+                                                                        <%=comment.user.name%>
+                                                                    </small>
+                                            </p>
+                                            <% } %>
+                                        </ul>
+                                    </div>
+                </p>
+                <% } %>
+        </div>
+        <section id="user-freinds">
+            <h4>Freinds</h4>
+            <% for(u of all_users){ %>
+                <p>
+                    <a href="/users/profile/<%= u.id %>">
+                        <%=u.name %>
+                    </a>
+                </p>
+                <% } %>
+        </section>
+
     </div>
 </body>
 

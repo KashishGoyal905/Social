@@ -1,7 +1,7 @@
 const User = require('../models/user');
 
 // profile page
-module.exports.profile = function (req, res) {
+module.exports.profile = async (req, res) => {
     // if (req.cookies.user_id) {
     //     console.log(req.cookies.user_id);
     //     User.findOne(req.cookies.user_id, function (err, user) {
@@ -16,29 +16,31 @@ module.exports.profile = function (req, res) {
     //     console.log('1')
     //     return res.redirect('/users/sign-In');
     // }
-    User.findById(req.params.id, function (err, user) {
+    try {
+        let user = await User.findById(req.params.id)
         return res.render('user_profile', {
             title: 'home',
             profile_user: user
         });
-    })
+    } catch (err) {
+        // req.flash('error', 'Post not created');
+        return res.redirect('back');
+    }
+
 }
 
-module.exports.update = function (req, res) {
-    console.log("updating");
+
+module.exports.update = (req, res) => {
     if (req.user.id == req.params.id) {
         User.findByIdAndUpdate(req.params.id, req.body, function (err, user) {
             return res.redirect('back');
         });
-    } else {
-        return res.status(401).send('Unauthorized');
     }
-    console.log("updated");
 
 }
 
 // sign form page
-module.exports.signIn = function (req, res) {
+module.exports.signIn = (req, res) => {
     if (req.isAuthenticated()) {
         return res.redirect('/users/profile')
     }
@@ -48,7 +50,7 @@ module.exports.signIn = function (req, res) {
 }
 
 // sign up form page
-module.exports.signUp = function (req, res) {
+module.exports.signUp = (req, res) => {
     if (req.isAuthenticated()) {
         return res.redirect('/users/profile')
     }
@@ -89,6 +91,8 @@ module.exports.create = function (req, res) {
 
 // post req for sign in
 module.exports.createSession = function (req, res) {
+    // to pass on these to the ejs file
+    req.flash('success', 'logged in sucessfully');
     return res.redirect('/');
     // // find the user 
     // User.findOne({ email: req.body.email }, function (err, user) {
@@ -120,5 +124,7 @@ module.exports.signOut = function (req, res) {
 
 module.exports.destroySession = function (req, res) {
     req.logout();
+    // we use middleware to put this req in res.red.....
+    req.flash('success', 'logged out sucessfully');
     return res.redirect('/');
 }

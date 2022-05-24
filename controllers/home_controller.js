@@ -4,7 +4,7 @@ const User = require('../models/user');
 module.exports.home = async (req, res) => {
     // // from browser sending
     // console.log(req.cookies);
-    // // from codeial_development
+    // //from codeial_development
     // res.cookie('user_id', 20); 
 
     // //simple
@@ -19,6 +19,7 @@ module.exports.home = async (req, res) => {
     // })
 
     // populate the user of each of posts
+
     // Post.find({})
     //     .populate('user')
     //     .populate({
