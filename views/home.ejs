@@ -14,8 +14,7 @@
         <%= title %>
     </h1>
 
-
-    <section id="feed-posts">
+    <section>
         <h3>Posts</h3>
         <% if(locals.user){ %>
             <form action="/posts/create" id="new-post-form" method="post">
@@ -26,31 +25,30 @@
             <% } %>
     </section>
 
-    <div id="home-container">
-        <div id="feed-posts">
-            <h3>All Posts: </h3>
-            <% for (post of posts){ %>
-                <p>
-                    <% if((locals.user) && (locals.user.id==post.user.id)){ %>
-                        <small>
-                            <a href="/posts/destroy/<%= post._id %>">X</a>
-                        </small>
-                        <% } %>
-                            <%=post.content%> --
-                                <%=post.user.name%>
-                                    <div class="post-comments">
-                                        <% if(locals.user){ %>
-                                            <form action="/comments/create" id="new-post-form" method="post">
-                                                <input type="text" name="content" id="content"
-                                                    placeholder="Comment here...." required />
-                                                <input type="hidden" name="post" value="<%= post._id %>">
-                                                <button type="submit">Add Comment</button>
-                                            </form>
-                                            <% } %>
+    <div>
+        <h3>All Posts: </h3>
+        <% for (post of posts){ %>
+            <p>
+                <% if((locals.user) && (locals.user.id==post.user.id)){ %>
+                    <small>
+                        <a href="/posts/destroy/<%= post._id %>">X</a>
+                    </small>
+                    <% } %>
+                        <%=post.content%> --
+                            <%=post.user.name%>
+                                <div class="post-comments">
+                                    <% if(locals.user){ %>
+                                        <form action="/comments/create" id="new-post-form" method="post">
+                                            <input type="text" name="content" id="content"
+                                                placeholder="Comment here...." required />
+                                            <input type="hidden" name="post" value="<%= post._id %>">
+                                            <button type="submit">Add Comment</button>
+                                        </form>
+                                        <% } %>
 
-                                    </div>
-                                    <div class="post-comment-list">
-                                        <ul id="post-comments-<%= post._id %>">
+                                </div>
+                                <div class="post-comment-list">
+                                    <ul id="post-comments-<%= post._id %>">
 
                                             <p>
                                                 <% for(let comment of post.comments){ %>
@@ -81,8 +79,8 @@
                 </p>
                 <% } %>
         </section>
-    </div>
 
+    </div>
 </body>
 
 </html>
