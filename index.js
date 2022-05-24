@@ -2,16 +2,29 @@ const express = require('express');
 // requiring cookie parser  {for reading and writin into cookies}  // not required in passport
 const cookieParser = require('cookie-parser')
 const app = express();
+// require("dotenv").config();
+// const port = process.env.PORT || 8000;
 const port = 8000;
 const expressLayouts = require('express-ejs-layouts');
 const db = require('./config/mongoose');
-// used for session cookie
+// used for session cookie 
 const session = require('express-session');
 const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
 // 
 // to store cookies in db
 const MongoStore = require('connect-mongo');
+// scss middleware for styling 
+const sassMiddleware = require('node-sass-middleware');
+
+// sass documentation
+app.use(sassMiddleware({
+    src: './assets/scss',
+    dest: './assets/css',
+    debug: true,
+    outputStyle: 'extended',
+    prefix: '/css'
+}));
 
 app.use(express.static('./assets'));
 
@@ -61,6 +74,5 @@ app.listen(port, function (err) {
     if (err) {
         console.log(`Error in running the server: ${err}`);
     }
-
-   console.log(`Server is running on port: ${port}`);
+    console.log(`Server is running on port: ${port}`);
 });
