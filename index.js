@@ -17,6 +17,10 @@ const MongoStore = require('connect-mongo');
 // scss middleware for styling 
 const sassMiddleware = require('node-sass-middleware');
 
+// flash
+const flash = require('connect-flash');
+const custMware = require('./config/middleware');
+
 // sass documentation
 app.use(sassMiddleware({
     src: './assets/scss',
@@ -63,6 +67,9 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
+// use after the session cause it used the session 
+app.use(flash());
+app.use(custMware.setFlash);
 
 app.use(passport.setAuthenticatedUser);
 
